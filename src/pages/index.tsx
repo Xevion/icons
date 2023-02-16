@@ -1,18 +1,14 @@
 import {type NextPage} from "next";
 import Head from "next/head";
-import Card from "../components/Card";
 // @ts-ignore
 import iconList from "@utils/iconList";
 import {useEffect, useMemo, useState} from "react";
 import {useDebounce} from "usehooks-ts";
-// import Fuse from "fuse.js";
 import {AiOutlineLoading3Quarters} from "react-icons/ai";
 import IconCatalog from "@components/render/IconCatalog";
 import NoSSR from 'react-no-ssr';
 
 const icons = iconList as { id: string, setId: string }[];
-// const fuse = new Fuse(icons, {keys: ["id", "setId"], threshold: 0.2})
-const maximumResults = 10000;
 
 const Home: NextPage = () => {
     const [query, setQuery] = useState("");
@@ -60,9 +56,7 @@ const Home: NextPage = () => {
                             {showLoading ? <AiOutlineLoading3Quarters className="animate-spin h-5 w-5"/>
                                 : (query.length == 0
                                     ? icons.length
-                                    : (filtered.length === maximumResults
-                                        ? `${maximumResults}+`
-                                        : filtered.length))}
+                                    : filtered.length)}
                         </span>
                         {
                             timing !== 0
@@ -74,7 +68,7 @@ const Home: NextPage = () => {
                 <div>
                     {catalog}
                 </div>
-                <ul role="list" className="hidden grid gap-4 p-0 link-card-grid"
+                {/*<ul role="list" className="grid gap-4 p-0 link-card-grid"
                     style={{gridTemplateColumns: "repeat(auto-fit, minmax(24ch, 1fr))"}}>
                     <Card
                         href="https://docs.astro.build/"
@@ -96,7 +90,7 @@ const Home: NextPage = () => {
                         title="Community"
                         body="Come say hi to our amazing Discord community. ❤️"
                     />
-                </ul>
+                </ul>*/}
             </main>
         </>
     );
