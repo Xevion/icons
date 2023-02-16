@@ -37,7 +37,7 @@ const Home: NextPage = () => {
     }, [debouncedQuery]);
 
     const catalog = useMemo(() => {
-        return <IconCatalog icons={filtered.map(i => i).slice(0, 100)}/>;
+        return <IconCatalog icons={debouncedQuery.length === 0 ? [] : filtered.map(i => i).slice(0, 100)}/>;
     }, [filtered]);
 
     return (
