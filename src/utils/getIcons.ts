@@ -1,4 +1,5 @@
 import codegen from "babel-plugin-codegen/macro";
+import {IconType} from "react-icons";
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call */
 // language=JavaScript
@@ -13,7 +14,7 @@ const fn = codegen`
 `;
 /* eslint-enable */
 
-export function getIcons(id: string) {
+export function getIcons(id: string): Promise<{[id: string]: IconType}> {
     /*
     Dynamic Import with improved performance.
     Macros are used to avoid bundling unnecessary modules.

@@ -27,6 +27,7 @@ const IconInternal: FunctionComponent<IconInternalProps> = ({label, children}) =
 }
 
 const DisplayIconSingle: FunctionComponent<DisplayIconSingleProps> = ({setId, id}) => {
+    // eslint-disable-next-line
     const IconSet = loadable.lib(() => getIcons(setId));
 
     return <IconSet fallback={<IconInternal label={"Loading..."} />} >
