@@ -1,10 +1,13 @@
-// @ts-nocheck
 // @codegen
+// @ts-nocheck
 /* eslint-disable */
 
 // @ts-ignore
-module.exports = require("./icons").ICON_SET_IDS
+const identifiers = require("react-icons/lib").IconsManifest.map(pack => pack.id);
+const icons = identifiers
     .map(setId => Object.keys(require(`react-icons/${setId}/index`)).map(id => (
-        {id, setId}
+        `{id: "${id}", setId: "${setId}"}`
     )))
-    .flat()
+    .flat();
+
+module.exports = `export default [${icons.join(", ")}];`;
