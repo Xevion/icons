@@ -1,5 +1,5 @@
 import codegen from "babel-plugin-codegen/macro";
-import {IconType} from "react-icons";
+import type {IconType} from "react-icons";
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call */
 // language=JavaScript

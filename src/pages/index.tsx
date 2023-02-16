@@ -23,7 +23,7 @@ const Home: NextPage = () => {
 
     const filtered = useMemo(() => {
         const start = new Date();
-        const results = icons.filter(({id}) => id.toLowerCase().indexOf(query) !== -1);
+        const results = debouncedQuery.length == 0 ? [] : icons.filter(({id}) => id.toLowerCase().indexOf(query) !== -1);
         const end = new Date();
 
         // const results = fuse.search(query, {limit: maximumResults});
@@ -33,7 +33,7 @@ const Home: NextPage = () => {
     }, [debouncedQuery]);
 
     const catalog = useMemo(() => {
-        return <IconCatalog icons={debouncedQuery.length === 0 ? [] : filtered.map(i => i).slice(0, 100)}/>;
+        return <IconCatalog icons={filtered.map(i => i).slice(0, 100)}/>;
     }, [filtered]);
 
     return (

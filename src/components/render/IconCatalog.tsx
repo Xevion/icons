@@ -1,8 +1,6 @@
 import type {FunctionComponent} from "react";
 import DisplayIconSingle from "@components/render/DisplayIconSingle";
 
-const regex = /^([A-Z][a-z]{1,})[A-Z]\w+$/;
-
 type Props = {
     icons: { id: string, setId: string }[];
 };
