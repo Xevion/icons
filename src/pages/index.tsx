@@ -64,11 +64,10 @@ const Home: NextPage = () => {
                 <title>Icons</title>
                 <link rel="icon" href="/favicon.ico"/>
                 <OGP
-                    url={env.NEXT_PUBLIC_APP_URL}
+                    url="https://icons.xevion.dev"
                     title="Icons"
                     description="A custom search engine for all of the icons in the React-Icons library."
                     siteName="icons.xevion.dev"
-                    image="http://example.com/cover.jpg"
                 />
             </Head>
             <main className="flex flex-col items-center m-auto p-6 max-w-[130ch]">
