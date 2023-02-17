@@ -64,7 +64,7 @@ const Home: NextPage = () => {
                 <title>Icons</title>
                 <link rel="icon" href="/favicon.ico"/>
                 <OGP
-                    url={env.NEXT_PUBLIC_APP_URL as string}
+                    url={env.NEXT_PUBLIC_APP_URL}
                     title="Icons"
                     description="A custom search engine for all of the icons in the React-Icons library."
                     siteName="icons.xevion.dev"
