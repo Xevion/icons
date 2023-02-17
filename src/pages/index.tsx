@@ -7,21 +7,23 @@ import {useDebounce} from "usehooks-ts";
 import {AiOutlineLoading3Quarters} from "react-icons/ai";
 import IconCatalog from "@components/render/IconCatalog";
 import NoSSR from 'react-no-ssr';
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const icons = iconList as { id: string, setId: string }[];
+export type IconIdentifierPair = { id: string, setId: string };
+const icons = iconList as IconIdentifierPair[];
 
 const Home: NextPage = () => {
     const [query, setQuery] = useState("");
     const [showLoading, setShowLoading] = useState(false);
     const [timing, setTiming] = useState<number>(0);
-    const debouncedQuery = useDebounce(query, 300);
+    const debouncedQuery = useDebounce(query, 800);
 
     useEffect(() => {
         setShowLoading(query.length != 0);
     }, [query]);
 
 
-    const filtered = useMemo(() => {
+    const allFilteredIcons = useMemo(() => {
         const start = new Date();
         const results = debouncedQuery.length == 0 ? [] : icons.filter(({id}) => id.toLowerCase().indexOf(query) !== -1);
         const end = new Date();
@@ -32,9 +34,12 @@ const Home: NextPage = () => {
         return results;
     }, [debouncedQuery]);
 
-    const catalog = useMemo(() => {
-        return <IconCatalog icons={filtered.map(i => i).slice(0, 100)}/>;
-    }, [filtered]);
+    useEffect(() => {
+        setLazyIcons(icons.slice(0, 100))
+    }, [allFilteredIcons]);
+
+
+    const [lazyIcons, setLazyIcons] = useState<IconIdentifierPair[]>([]);
 
     return (
         <>
@@ -56,7 +61,7 @@ const Home: NextPage = () => {
                             {showLoading ? <AiOutlineLoading3Quarters className="animate-spin h-5 w-5"/>
                                 : (query.length == 0
                                     ? icons.length
-                                    : filtered.length)}
+                                    : allFilteredIcons.length)}
                         </span>
                         {
                             timing !== 0
@@ -66,31 +71,16 @@ const Home: NextPage = () => {
                     </NoSSR>
                 </div>
                 <div>
-                    {catalog}
+                    {useMemo(() => <InfiniteScroll hasMore={lazyIcons.length < allFilteredIcons.length}
+                                                   loader={<span>Loading...</span>}
+                                                   dataLength={lazyIcons.length}
+                                                   next={() => {
+                                                       const newLength = Math.min(lazyIcons.length + 300, allFilteredIcons.length)
+                                                       setLazyIcons(allFilteredIcons.slice(0, newLength))
+                                                   }}>
+                        <IconCatalog icons={lazyIcons}/>
+                    </InfiniteScroll>, [lazyIcons])}
                 </div>
-                {/*<ul role="list" className="grid gap-4 p-0 link-card-grid"
-                    style={{gridTemplateColumns: "repeat(auto-fit, minmax(24ch, 1fr))"}}>
-                    <Card
-                        href="https://docs.astro.build/"
-                        title="Documentation"
-                        body="Learn how Astro works and explore the official API docs."
-                    />
-                    <Card
-                        href="https://astro.build/integrations/"
-                        title="Integrations"
-                        body="Supercharge your project with new frameworks and libraries."
-                    />
-                    <Card
-                        href="https://astro.build/themes/"
-                        title="Themes"
-                        body="Explore a galaxy of community-built starter themes."
-                    />
-                    <Card
-                        href="https://astro.build/chat/"
-                        title="Community"
-                        body="Come say hi to our amazing Discord community. ❤️"
-                    />
-                </ul>*/}
             </main>
         </>
     );
