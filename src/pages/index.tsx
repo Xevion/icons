@@ -76,13 +76,13 @@ const Home: NextPage = () => {
                     <input
                         ref={searchRef}
                         autoFocus
-                        className="grow bg-transparent ring-0 outline-none text-xl"
+                        className="placeholder:text-zinc-400 dark:text-zinc-200 dark:placeholder:text-zinc-300 grow bg-transparent ring-0 outline-none text-xl"
                         placeholder="Search for an icon..."
                         onChange={({target: {value}}) => setQuery(value)}
                         value={query}
                     />
                     <NoSSR>
-                        <span className="shrink text-xl text-zinc-500">
+                        <span className="shrink text-xl text-zinc-500 dark:text-zinc-200">
                             {showLoading ? <AiOutlineLoading3Quarters className="animate-spin h-5 w-5"/>
                                 : (query.length == 0
                                     ? icons.length
@@ -90,7 +90,7 @@ const Home: NextPage = () => {
                         </span>
                         {
                             timing !== 0
-                                ? <span className="ml-2 shrink text-lg text-zinc-400">{timing}ms</span>
+                                ? <span className="ml-2 shrink text-lg text-zinc-400 dark:text-zinc-300">{timing}ms</span>
                                 : null
                         }
                     </NoSSR>

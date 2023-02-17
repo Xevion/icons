@@ -23,7 +23,7 @@ const IconInternal: FunctionComponent<IconInternalProps> = ({label, children, on
         onClick={onClick}>
         {children ?? <BsQuestionCircle className="w-8 h-8"/>}
         <span
-            className="px-1 mt-1 text-[10px]">
+            className="text-black dark:text-zinc-200 px-1 mt-1 text-[10px]">
         {label}
         </span>
     </div>
@@ -32,14 +32,17 @@ const IconInternal: FunctionComponent<IconInternalProps> = ({label, children, on
 const DisplayIconSingle: FunctionComponent<DisplayIconSingleProps> = ({setId, id}) => {
     // eslint-disable-next-line
     const IconSet = loadable.lib(() => getIcons(setId));
+    const iconClass = "text-slate-700 dark:text-slate-200 group-hover:text-slate-900 group-hover:scale-125 transition-transform w-8 h-8";
 
-    return <IconSet fallback={<IconInternal label="..."/>}>
+    return <IconSet fallback={<IconInternal label="...">
+        <BsQuestionCircle className={iconClass}/>
+    </IconInternal>}>
         {(module) => {
             const Icon: IconType | undefined = (module as { [icon: string]: IconType })[id] ?? BiError;
             return <IconInternal label={id} onClick={() => {
                 void navigator.clipboard.writeText(`import {${id}} from "react-icons/${setId}";`)
             }}>
-                <Icon className="text-slate-700 group-hover:text-slate-900 group-hover:scale-125 transition-transform w-8 h-8"/>
+                <Icon className={iconClass}/>
             </IconInternal>
 
         }}
