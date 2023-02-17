@@ -39,6 +39,7 @@ const processEnv = {
 // --------------------------
 
 const merged = server.merge(client);
+
 /** @type z.infer<merged>
  *  @ts-ignore - can't type this properly in jsdoc */
 let env = process.env;
