@@ -32,7 +32,7 @@ const IconInternal: FunctionComponent<IconInternalProps> = ({label, children, on
 const DisplayIconSingle: FunctionComponent<DisplayIconSingleProps> = ({setId, id}) => {
     // eslint-disable-next-line
     const IconSet = loadable.lib(() => getIcons(setId));
-    const iconClass = "text-slate-700 dark:text-slate-200 group-hover:text-slate-900 group-hover:scale-125 transition-transform w-8 h-8";
+    const iconClass = "text-slate-700 stroke-slate-700 dark:text-slate-200 dark:stroke-slate-200 group-hover:text-slate-900 group-hover:scale-125 transition-transform w-8 h-8";
 
     return <IconSet fallback={<IconInternal label="...">
         <BsQuestionCircle className={iconClass}/>
@@ -42,7 +42,7 @@ const DisplayIconSingle: FunctionComponent<DisplayIconSingleProps> = ({setId, id
             return <IconInternal label={id} onClick={() => {
                 void navigator.clipboard.writeText(`import {${id}} from "react-icons/${setId}";`)
             }}>
-                <Icon className={iconClass}/>
+                <Icon className={classNames(iconClass, setId === 'gr' ? 'forceStroke' : null)}/>
             </IconInternal>
 
         }}

@@ -75,7 +75,7 @@ const Home: NextPage = () => {
                     <input
                         ref={searchRef}
                         autoFocus
-                        className="placeholder:text-zinc-400 dark:text-zinc-200 dark:placeholder:text-zinc-300 grow bg-transparent ring-0 outline-none text-xl"
+                        className="placeholder:text-zinc-400 dark:text-zinc-200 dark:placeholder:text-zinc-400 grow bg-transparent ring-0 outline-none text-xl"
                         placeholder="Search for an icon..."
                         onChange={({target: {value}}) => setQuery(value)}
                         value={query}
