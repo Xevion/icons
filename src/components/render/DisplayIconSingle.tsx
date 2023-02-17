@@ -29,6 +29,7 @@ const IconInternal: FunctionComponent<IconInternalProps> = ({label, children, on
     </div>
 }
 
+const forcedSets = ['gr', 'tb', 'io5', 'fi', 'hi'];
 const DisplayIconSingle: FunctionComponent<DisplayIconSingleProps> = ({setId, id}) => {
     // eslint-disable-next-line
     const IconSet = loadable.lib(() => getIcons(setId));
@@ -42,7 +43,8 @@ const DisplayIconSingle: FunctionComponent<DisplayIconSingleProps> = ({setId, id
             return <IconInternal label={id} onClick={() => {
                 void navigator.clipboard.writeText(`import {${id}} from "react-icons/${setId}";`)
             }}>
-                <Icon className={classNames(iconClass, setId === 'gr' ? 'forceStroke' : null)}/>
+
+                <Icon className={classNames(iconClass, forcedSets.indexOf(setId) != -1 ? 'forceStroke' : null)}/>
             </IconInternal>
 
         }}

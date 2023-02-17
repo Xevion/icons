@@ -16,6 +16,9 @@ code {
   Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
-.forceStroke > path, g {
-  stroke: currentColor;
+//
+.forceStroke {
+  > path:not([stroke="none"]), g, rect, line, polyline, circle, polygon {
+    stroke: currentColor;
+  }
 }
