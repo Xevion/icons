@@ -5,7 +5,7 @@ export default function Document() {
     return (
         <Html>
             <Head>
-                <script src="/js/darkmode.js" />
+                <script src="/js/darkmode.js" async />
             </Head>
             <body>
                 <Main/>
