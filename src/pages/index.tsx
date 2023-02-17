@@ -4,10 +4,12 @@ import Head from "next/head";
 import iconList from "@utils/iconList";
 import {useEffect, useMemo, useState} from "react";
 import {useDebounce} from "usehooks-ts";
+import { useHotkeys } from 'react-hotkeys-hook'
 import {AiOutlineLoading3Quarters} from "react-icons/ai";
 import IconCatalog from "@components/render/IconCatalog";
 import NoSSR from 'react-no-ssr';
 import InfiniteScroll from "react-infinite-scroll-component";
+import useFocus from "@utils/useFocus";
 
 export type IconIdentifierPair = { id: string, setId: string };
 const icons = iconList as IconIdentifierPair[];
@@ -38,7 +40,10 @@ const Home: NextPage = () => {
         setLazyIcons(icons.slice(0, 100))
     }, [allFilteredIcons]);
 
-
+    useHotkeys(['ctrl+k', 'ctrl+/'], () => {
+        focusSearch();
+    }, {preventDefault: true})
+    const [searchRef, focusSearch] = useFocus<HTMLInputElement>()
     const [lazyIcons, setLazyIcons] = useState<IconIdentifierPair[]>([]);
 
     return (
@@ -51,6 +56,8 @@ const Home: NextPage = () => {
             <main className="flex flex-col items-center m-auto p-6 max-w-[100ch]">
                 <div className="flex max-w-[60ch] px-1 py-2 m-4">
                     <input
+                        ref={searchRef}
+                        autoFocus
                         className="grow bg-transparent ring-0 outline-none text-xl"
                         placeholder="Search for an icon..."
                         onChange={({target: {value}}) => setQuery(value)}
