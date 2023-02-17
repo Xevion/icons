@@ -2175,6 +2175,11 @@ react-no-ssr@^1.1.0:
   dependencies:
     babel-runtime "6.x.x"
 
+react-ogp@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/react-ogp/-/react-ogp-0.0.3.tgz#f3d49ff49e593576778f6a11824a4ccb2d8b427d"
+  integrity sha512-+m5my7G6dxzN79e1e/M5VV2MmM2sXrTqs+hfL8sFHsjWn4PMv3P8eD/aMSHPibvp6BYsiFCeWMMSzcqUCIQr9w==
+
 react@18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
