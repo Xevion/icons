@@ -28,8 +28,9 @@ const Home: NextPage = () => {
 
 
     const allFilteredIcons = useMemo(() => {
+        const lowercaseQuery = query.toLowerCase();
         const start = new Date();
-        const results = debouncedQuery.length == 0 ? [] : icons.filter(({id}) => id.toLowerCase().indexOf(query) !== -1);
+        const results = debouncedQuery.length == 0 ? [] : icons.filter(({id}) => id.toLowerCase().indexOf(lowercaseQuery) !== -1);
         const end = new Date();
 
         // const results = fuse.search(query, {limit: maximumResults});
