@@ -5,12 +5,11 @@ export default function Document() {
     return (
         <Html>
             <Head>
-                <script src="/js/darkmode.js" async />
             </Head>
             <body>
+                <script src="/js/darkmode.js" />
                 <Main/>
                 <NextScript/>
-                <Script strategy="beforeInteractive" id="automatic-darkmode" src="/js/darkmode.js"/>
             </body>
         </Html>
     )
